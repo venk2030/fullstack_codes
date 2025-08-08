@@ -1,0 +1,45 @@
+
+---
+
+### 📁 `docs/flows/`
+
+#### 📄 `event-forwarding.mermaid`
+<pre><code>```mermaid
+sequenceDiagram
+    participant Browser
+    participant DjangoAPI
+    participant DB
+    participant Celery
+    participant GA4
+
+    Browser->>DjangoAPI: POST /track (event)
+    DjangoAPI->>DB: Store event
+    DjangoAPI->>Celery: Queue task
+    Celery->>GA4: Send via Measurement Protocol
+```</code></pre>
+
+---
+
+### 📁 `docs/adr/`
+
+#### 📄 `0001-why-ga4.md`
+```md
+# ADR 0001: Why GA4 Measurement Protocol
+
+## Status
+
+Accepted
+
+## Context
+
+We need to track user interaction events server-side. GA4 MP provides a reliable, HTTP-based method to send analytics data without requiring frontend instrumentation.
+
+## Decision
+
+We implemented a `/track/` endpoint that collects analytics data and forwards it to GA4 using Measurement Protocol.
+
+## Consequences
+
+- Avoids client-side GA SDK issues (ad-blockers, privacy settings)
+- Easier GDPR compliance via backend filtering
+- Requires batching logic for efficiency (handled via Celery)
