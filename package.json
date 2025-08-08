@@ -1,0 +1,22 @@
+{
+  "name": "mvp1-docs",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "docusaurus start",
+    "build": "docusaurus build",
+    "serve": "docusaurus serve",
+    "deploy": "GIT_USER=venk2030 USE_SSH=true yarn build && docusaurus deploy"
+  },
+  "dependencies": {
+    "@docusaurus/core": "^2.4.0",
+    "@docusaurus/preset-classic": "^2.4.0",
+    "clsx": "^1.2.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "remark-mermaid": "^1.0.4"
+  },
+  "devDependencies": {
+    "prettier": "^2.8.4"
+  }
+}
